@@ -1,0 +1,10 @@
+Step 1: Access the template
+
+https://d3c33hcgiwev3.cloudfront.net/9fgugIREQHS_mmPrWtyTyQ_097917794bb5468da5453628bf8511f1_Security-incident-report-template.docx?Expires=1784083899&Signature=LZexBTh6JmxvRxp0I9dnoHkcMJyhnHoQJ2d6F~uk9tw9zwUmErE50T8ct~wgReTux6PgIptFRuxCELyB0RXH-4ZtsQ3RyScXBoG72eqm3PMPnY0H2Y~aOfc0YQSuQ30nQTVVjD8iqjpRVYB4TFi6bz6pc1G8X6M-KjsSQ4k-jfc_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A
+
+
+Step 2: Access supporting materials
+
+https://d3c33hcgiwev3.cloudfront.net/DfNS2bS8SFSX2LAq8wdGew_2e223b94ae5c4f7dbf841cee85b247f1_tcpdump-traffic-log.docx?Expires=1784083899&Signature=dKYrkAoO9-LkFSwo0mIOxwvZURDdpn9pHYCjQaouF3i9-i7yNJZdJJKHopqPfCulqZZ3YbN43dKdBgwhTb1r3k-tUYj~MdanlYl6H9XJRyW5S~zmaVa68prY4AG9WIrOkRxToV8S3Rc3jUltF7Q92QYwuikhqqbvRT96HYG0VUo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A
+
+https://d3c33hcgiwev3.cloudfront.net/_136eeb4e3f7a47a9b1ad73c19c1df8c4_How-to-read-the-tcpdump-traffic-log.docx?Expires=1784083899&Signature=IhHGXpxLkVWscL8symELg-l0WCWqI9Bj2nQZoWBzUWUMTy3Ub82h8~sE-L4kzVdoaM5udnUkYG0Z~NjzsrR-u0xUJF24m7G84WMzBS5u9Vb~E0eDozM3xQUqNpS~6D0cUTSa0Chhb0~-vfjG8jWP2OguhU-os3EmypLq-V5sbnc_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A
