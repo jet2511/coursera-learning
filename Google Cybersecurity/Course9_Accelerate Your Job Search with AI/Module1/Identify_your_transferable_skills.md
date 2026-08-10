@@ -14,3 +14,11 @@
 - **Bước 3: Kết nối kỹ năng chuyển đổi với công việc mục tiêu (Connect skills to potential jobs)**
   - Ví dụ 1: Trợ lý Giám đốc (Executive Assistant) có kỹ năng quản lý lịch trình, phối hợp cuộc họp -> có thể chuyển đổi sang vị trí Quản lý Dự án (Project Manager).
   - Ví dụ 2: Trải nghiệm quân ngũ, thể thao, hoặc làm việc nhóm ở trường học -> giúp phát triển kỹ năng hợp tác và làm việc nhóm trong môi trường đa dạng.
+
+## 3. 4 Kỹ Năng Chuyển Đổi Cốt Lõi Được Nhà Tuyển Dụng Đánh Giá Cao (Góc Nhìn Từ Google Leader - Mike)
+- **Diễn giả:** Mike – Product Lead tại Google School for Leaders (nguyên là giáo viên). Các kỹ năng học từ lớp học (sắp xếp ưu tiên, quản lý thời gian, ứng biến, giao tiếp với lãnh đạo) đều chuyển đổi trực tiếp sang vai trò lãnh đạo tại Google.
+- **4 Kỹ Năng Chuyển Đổi Quan Trọng:**
+  1. **Ứng biến với sự mơ hồ (Navigating Ambiguity):** Khả năng phản ứng và xử lý hiệu quả trước những thay đổi liên tục hàng ngày mà không gây ảnh hưởng tiêu cực đến đồng đội.
+  2. **Điều tiết cảm xúc (Emotional Regulation):** Khả năng kiểm soát cảm xúc nội tại để thể hiện sự chuyên nghiệp ra bên ngoài, biết cách bình tĩnh làm việc với nhóm hoặc chủ động yêu cầu khoảng lặng khi cần. Thể hiện mức độ tự nhận thức (self-awareness) cao.
+  3. **Giao tiếp thích ứng (Communication):** Khả năng điều chỉnh cách truyền đạt linh hoạt tùy thuộc vào đối tượng nghe, đảm bảo thông điệp luôn rõ ràng và súc tích.
+  4. **Giải quyết vấn đề (Problem-Solving):** Khả năng mô tả cách bạn phản ứng và xử lý khi sự cố phát sinh, thể hiện góc nhìn toàn diện và giá trị độc đáo bạn đóng góp để nâng tầm năng lực của cả đội.
