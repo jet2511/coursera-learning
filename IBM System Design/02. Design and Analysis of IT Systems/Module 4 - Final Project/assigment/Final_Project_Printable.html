@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Final Project Submission - Digital Transformation Strategy</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 16mm 14mm 16mm 14mm;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: #24292f;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .header-card h1 {
+    font-size: 16pt;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .header-meta {
+    font-size: 9pt;
+    color: #e3f2fd;
+    display: flex;
+    gap: 16px;
+  }
+  h2 {
+    font-size: 12.5pt;
+    color: #0d47a1;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 10.5pt;
+    color: #1565c0;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 9.5pt;
+    color: #37474f;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 5px 0;
+  }
+  ul, ol {
+    margin: 4px 0;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 8px 0 12px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #cfd8dc;
+    padding: 5px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+  .highlight-rec {
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+  }
+  .highlight-rec td {
+    background-color: #f0fdf4 !important;
+    font-weight: 700;
+    color: #166534;
+  }
+  .badge-rec {
+    background: #16a34a;
+    color: #fff;
+    font-size: 7.5pt;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    font-weight: normal;
+  }
+  .callout {
+    background-color: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 9pt;
+  }
+  .callout-title {
+    font-weight: bold;
+    color: #1d4ed8;
+    margin-bottom: 3px;
+  }
+  .diagram-wrapper {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .diagram-wrapper svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  .section-divider {
+    border: 0;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 14px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-card">
+  <h1>Final Project: Digital Transformation Strategy for Retailer</h1>
+  <div class="header-meta">
+    <span><strong>Course:</strong> Design &amp; Analysis of IT Systems</span>
+    <span><strong>Role:</strong> Lead Systems Analyst</span>
+    <span><strong>Target:</strong> Unified Cloud Commerce (50 &rarr; 100+ Stores)</span>
+  </div>
+</div>
+
+<h2>Step 1: Assess Current Systems (9 Points)</h2>
+
+<h3>1.1 Summary of Current System Architecture</h3>
+<p>The retailer currently operates an outdated, fragmented infrastructure across approximately 50 physical stores and an independent online shop:</p>
+<ul>
+  <li><strong>Point-of-Sale (POS) Systems:</strong> In-store terminals run on legacy <strong>Windows CE</strong> operating systems with outdated card reader drivers from 2009. Transaction checkout latency regularly exceeds <strong>5 seconds</strong>.</li>
+  <li><strong>E-Commerce Platform:</strong> Built on <strong>Magento 1.9</strong> backed by an isolated MySQL database. Performance is severely degraded with Cumulative Layout Shift (<strong>CLS &gt; 0.25</strong>) and initial page load exceeding <strong>2 seconds on 4G networks</strong>.</li>
+  <li><strong>Data Storage &amp; Architecture:</strong> Each store hosts a separate <strong>on-premise SQL database</strong>. Transactions synchronize to Headquarters (HQ) via <strong>nightly batch ETL jobs</strong>, resulting in fragmented data silos and out-of-sync customer records.</li>
+  <li><strong>Inventory Management:</strong> Relies entirely on <strong>manual data entry via Excel/CSV spreadsheets</strong>, causing high stock visibility latency, inventory inaccuracies, and delayed supplier reordering.</li>
+</ul>
+
+<h3>1.2 Pain-Point Matrix (Issues, Impacts, and Root Causes)</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Operational Area</th>
+      <th style="width: 27%;">Specific Pain Point / Issue</th>
+      <th style="width: 27%;">Business &amp; Customer Impact</th>
+      <th style="width: 26%;">Technical Root Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Checkout (In-store &amp; Online)</strong></td>
+      <td>High latency (&gt;5s POS checkout, &gt;2s 4G web load, CLS &gt; 0.25).</td>
+      <td>Cart abandonment, reduced conversion rates, long queues, and customer churn.</td>
+      <td>Obsolete Windows CE hardware, 2009 peripheral drivers, and unoptimized monolithic Magento 1.9 architecture.</td>
+    </tr>
+    <tr>
+      <td><strong>Restocking &amp; Inventory</strong></td>
+      <td>Frequent stockouts, overstocks, and supplier reorder delays.</td>
+      <td>Lost sales revenue, inability to fulfill orders, and tied-up working capital.</td>
+      <td>Disconnected manual Excel spreadsheets and lack of automated real-time inventory decrement across channels.</td>
+    </tr>
+    <tr>
+      <td><strong>Marketing &amp; CRM</strong></td>
+      <td>Split customer lists and disconnected purchasing history.</td>
+      <td>Inability to run personalized omni-channel campaigns or loyalty programs.</td>
+      <td>Siloed store-level SQL databases updating only via nightly batch jobs to HQ with no centralized Customer Master Data.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>1.3 Key Inefficiencies Restricting Scaling &amp; Agility</h3>
+<ol>
+  <li><strong>Manual CSV Imports &amp; Duplicate Data Entry:</strong> Operations depend on spreadsheet reconciliation, causing high overhead and error risks.</li>
+  <li><strong>Inconsistent Customer Data across Channels:</strong> Absence of a Single Customer View (SCV) impedes marketing personalization.</li>
+  <li><strong>Sluggish POS and Web Interfaces:</strong> Degraded response times lower customer satisfaction and limit transaction volume.</li>
+  <li><strong>Lack of Real-Time Inventory Visibility:</strong> Obstructs Buy Online, Pickup In-Store (<strong>BOPIS</strong>) and blocks scalable expansion to 100+ stores.</li>
+</ol>
+
+<hr class="section-divider">
+
+<h2>Step 2: Define Stakeholder Requirements (10 Points)</h2>
+
+<h3>2.1 Stakeholders and Their Interests</h3>
+<ul>
+  <li><strong>Customers:</strong> Demand frictionless checkout, sub-2s page load, unified shopping cart, and 100% accurate real-time inventory visibility.</li>
+  <li><strong>Store Staff:</strong> Need reliable, intuitive POS terminals (&le;5s transactions) with multi-store inventory lookup for quick customer service.</li>
+  <li><strong>Management:</strong> Seek centralized data intelligence, 360&deg; customer profile, real-time margin analytics, and seamless scaling to 100+ stores.</li>
+  <li><strong>IT Team:</strong> Prioritize low maintenance overhead, modern API-first cloud architecture, and strict security compliance (PCI-DSS, GDPR).</li>
+</ul>
+
+<h3>2.2 Functional Requirements (FR) &amp; Justifications</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">ID</th>
+      <th style="width: 44%;">Functional Requirement Specification</th>
+      <th style="width: 44%;">Detailed Justification &amp; Pain Point Addressed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FR-01</strong></td>
+      <td>Process in-store sales transactions at POS within <strong>&le; 5 seconds</strong> (including payment gateway authorization).</td>
+      <td>Eliminates counter queue congestion and directly replaces obsolete Windows CE hardware/driver bottlenecks.</td>
+    </tr>
+    <tr>
+      <td><strong>FR-02</strong></td>
+      <td>Automatic <strong>real-time inventory decrement</strong> across all sales channels upon transaction commit.</td>
+      <td>Prevents overselling, eliminates manual Excel updates, and resolves chronic store stockouts.</td>
+    </tr>
+    <tr>
+      <td><strong>FR-03</strong></td>
+      <td>Provide a <strong>360&deg; Customer Profile API</strong> consolidating in-store &amp; online purchasing history and loyalty.</td>
+      <td>Eliminates batch sync silos; empowers marketing to execute personalized omnichannel campaigns.</td>
+    </tr>
+    <tr>
+      <td><strong>FR-04</strong></td>
+      <td>Support <strong>Buy Online, Pickup In-Store (BOPIS)</strong> and cross-channel inventory reservation workflows.</td>
+      <td>Meets modern consumer expectations and delivers seamless omnichannel fulfillment capabilities.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>2.3 Non-Functional Requirements (NFR) &amp; Justifications</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">ID</th>
+      <th style="width: 44%;">Non-Functional Requirement Specification</th>
+      <th style="width: 44%;">Detailed Justification &amp; Pain Point Addressed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>NFR-01</strong></td>
+      <td><strong>System Availability:</strong> High Availability <strong>&ge; 99.9% uptime</strong> (24x7x365) with automated cloud failover.</td>
+      <td>Ensures uninterrupted revenue during peak business hours and mission-critical retail continuity.</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-02</strong></td>
+      <td><strong>Performance / Latency:</strong> E-commerce page load <strong>&lt; 2s on 4G networks</strong> with CLS &le; 0.1.</td>
+      <td>Prevents customer drop-off, improves mobile conversion rates, and maximizes search engine ranking.</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-03</strong></td>
+      <td><strong>Scalability &amp; Elasticity:</strong> Elastic scaling to support <strong>3x holiday peak traffic</strong> and <strong>100+ stores</strong>.</td>
+      <td>Future-proofs the technical infrastructure to sustain corporate expansion without re-architecting.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="section-divider">
+
+<h2>Step 3: Evaluate Alternative Solutions (7 Points)</h2>
+
+<h3>3.1 Comparative Analysis Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Evaluation Criteria</th>
+      <th>Weight</th>
+      <th>Option A: Salesforce Commerce Cloud + POS</th>
+      <th>Option B: Shopify Plus + Square POS</th>
+      <th>Option C: Custom Microservices (React/Node)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Functional Fit</strong></td>
+      <td>40%</td>
+      <td><strong>9 / 10</strong> (Score: 3.6)</td>
+      <td><strong>8 / 10</strong> (Score: 3.2)</td>
+      <td><strong>9 / 10</strong> (Score: 3.6)</td>
+    </tr>
+    <tr>
+      <td><strong>Scalability</strong></td>
+      <td>20%</td>
+      <td><strong>10 / 10</strong> (Score: 2.0)</td>
+      <td><strong>7 / 10</strong> (Score: 1.4)</td>
+      <td><strong>10 / 10</strong> (Score: 2.0)</td>
+    </tr>
+    <tr>
+      <td><strong>Total Cost of Ownership (Yr 1)</strong></td>
+      <td>20%</td>
+      <td><strong>7 / 10</strong> ($150,000) (Score: 1.4)</td>
+      <td><strong>9 / 10</strong> ($50,000) (Score: 1.8)</td>
+      <td><strong>4 / 10</strong> ($300,000) (Score: 0.8)</td>
+    </tr>
+    <tr>
+      <td><strong>Implementation Risk</strong></td>
+      <td>10%</td>
+      <td><strong>7 / 10</strong> (Risk: 15 / 6 mos) (Score: 0.7)</td>
+      <td><strong>9 / 10</strong> (Risk: 10 / 3 mos) (Score: 0.9)</td>
+      <td><strong>3 / 10</strong> (Risk: 25 / 12 mos) (Score: 0.3)</td>
+    </tr>
+    <tr>
+      <td><strong>Vendor Viability</strong></td>
+      <td>10%</td>
+      <td><strong>10 / 10</strong> (Market Leader) (Score: 1.0)</td>
+      <td><strong>9 / 10</strong> (Public SaaS) (Score: 0.9)</td>
+      <td><strong>5 / 10</strong> (Self-maintained) (Score: 0.5)</td>
+    </tr>
+    <tr class="highlight-rec">
+      <td><strong>Weighted Total Score</strong></td>
+      <td><strong>100%</strong></td>
+      <td><strong>8.7 / 10 <span class="badge-rec">RECOMMENDED</span></strong></td>
+      <td><strong>8.2 / 10</strong></td>
+      <td><strong>7.2 / 10</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.2 Recommendation and Rationale</h3>
+<div class="callout">
+  <div class="callout-title">Recommended Solution: Option A - Salesforce Commerce Cloud + POS (Tableau Retail)</div>
+  <p><strong>Strategic Rationale:</strong></p>
+  <ul>
+    <li><strong>Ideal for 100+ Store Expansion:</strong> Enterprise-grade scalability (10/10) with native omnichannel Order Management (OMS), unified customer CRM, and Tableau Retail analytics.</li>
+    <li><strong>Timeline Alignment:</strong> 6-month deployment time-to-value fits well inside management's strict 9-month window prior to the holiday season.</li>
+    <li><strong>Rejection Rationale:</strong> <em>Shopify Plus (Option B)</em> suffers from multi-store scalability limitations beyond 100 enterprise stores; <em>Custom Microservices (Option C)</em> requires 12 months (exceeding timeline), costs $300k, and carries high execution risks.</li>
+  </ul>
+</div>
+
+<h3>3.3 Trade-Offs for the Recommended Solution</h3>
+<ul>
+  <li><strong>Cost vs. Scalability:</strong> Year 1 investment ($150,000) is higher than Shopify Plus ($50,000), but eliminates future migration costs when expanding to 100+ stores.</li>
+  <li><strong>Customization vs. Delivery Speed:</strong> Uses standard enterprise workflows rather than bespoke code, significantly reducing technical debt and long-term maintenance burdens.</li>
+</ul>
+
+<hr class="section-divider">
+
+<h2>Step 4: Feasibility and Risk Analysis (8 Points)</h2>
+
+<h3>4.1 Technical, Economic, and Operational Feasibility</h3>
+<ul>
+  <li><strong>Technical Feasibility:</strong> Fully feasible. Cloud SaaS platform provides robust RESTful APIs, zero store-level database footprint, and certified hardware integrations.</li>
+  <li><strong>Economic Feasibility:</strong> Strong positive Net Present Value (NPV) over 5 years. Reduced maintenance and eliminated stockouts offset the $150k initial investment.</li>
+  <li><strong>Operational Feasibility:</strong> Highly feasible. Intuitive interfaces enable comprehensive staff upskilling within <strong>8 weeks</strong> without disrupting ongoing retail sales.</li>
+</ul>
+
+<h3>4.2 Risk Register &amp; Mitigation Strategies</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 10%;">Risk ID</th>
+      <th style="width: 32%;">Risk Description</th>
+      <th style="width: 10%;">P (1-5)</th>
+      <th style="width: 10%;">I (1-5)</th>
+      <th style="width: 10%;">Score</th>
+      <th style="width: 28%;">Mitigation Strategy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R1</strong></td>
+      <td><strong>Data Migration Loss or Corruption:</strong> Schema discrepancies migrating store SQL and Magento DBs.</td>
+      <td>3</td>
+      <td>4</td>
+      <td><strong>12</strong></td>
+      <td>Execute <strong>two dry runs</strong> in staging; apply automated <strong>Checksum integrity validations</strong> before cutover.</td>
+    </tr>
+    <tr>
+      <td><strong>R2</strong></td>
+      <td><strong>Vendor Outage / Connectivity Loss:</strong> Cloud disruption or local store internet failure during store hours.</td>
+      <td>2</td>
+      <td>5</td>
+      <td><strong>10</strong></td>
+      <td>Enforce <strong>99.9% vendor SLA</strong>; deploy smart POS terminals with <strong>Offline Mode capability</strong> (local caching &amp; auto-sync).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>4.3 Ensuring Project Success within the 9-Month Timeline</h3>
+<p>The mitigation strategies directly protect the 9-month critical path by pre-validating data through dry runs (avoiding launch rollbacks) and enabling store pilot training in parallel with cloud integration.</p>
+
+<hr class="section-divider">
+
+<h2>Step 5: Visualize and Communicate Recommendations (6 Points)</h2>
+
+<h3>5.1 Architecture &amp; Omnichannel Process Flow (Visual Artifact)</h3>
+
+<h4>A. Target Unified Cloud Commerce Architecture</h4>
+<div class="diagram-wrapper">
+  <svg viewBox="0 0 720 250" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gradChan" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f0f9ff"/>
+        <stop offset="100%" stop-color="#e0f2fe"/>
+      </linearGradient>
+      <linearGradient id="gradCore" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f0fdf4"/>
+        <stop offset="100%" stop-color="#dcfce7"/>
+      </linearGradient>
+      <linearGradient id="gradSupp" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fefce8"/>
+        <stop offset="100%" stop-color="#fef08a"/>
+      </linearGradient>
+      <marker id="arr1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7"/>
+      </marker>
+      <marker id="arr2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+      </marker>
+    </defs>
+
+    <!-- 1. Channels Layer -->
+    <rect x="10" y="10" width="200" height="230" rx="8" fill="url(#gradChan)" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="110" y="32" font-family="-apple-system, Arial" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">1. SALES CHANNELS</text>
+    
+    <rect x="22" y="44" width="176" height="38" rx="5" fill="#ffffff" stroke="#38bdf8"/>
+    <text x="110" y="62" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#0c4a6e" text-anchor="middle">Smart POS Terminals</text>
+    <text x="110" y="74" font-family="-apple-system, Arial" font-size="8" fill="#0369a1" text-anchor="middle">&le;5s Checkout &amp; Offline Cache</text>
+
+    <rect x="22" y="88" width="176" height="38" rx="5" fill="#ffffff" stroke="#38bdf8"/>
+    <text x="110" y="106" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#0c4a6e" text-anchor="middle">E-Commerce Storefront</text>
+    <text x="110" y="118" font-family="-apple-system, Arial" font-size="8" fill="#0369a1" text-anchor="middle">&lt;2s Load on 4G (Headless)</text>
+
+    <rect x="22" y="132" width="176" height="38" rx="5" fill="#ffffff" stroke="#38bdf8"/>
+    <text x="110" y="150" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#0c4a6e" text-anchor="middle">Customer Mobile App</text>
+    <text x="110" y="162" font-family="-apple-system, Arial" font-size="8" fill="#0369a1" text-anchor="middle">Unified Cart &amp; Loyalty</text>
+
+    <rect x="22" y="176" width="176" height="52" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-dasharray="3 3"/>
+    <text x="110" y="196" font-family="-apple-system, Arial" font-size="9" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Secure Cloud API Gateway</text>
+    <text x="110" y="210" font-family="-apple-system, Arial" font-size="7.5" fill="#2563eb" text-anchor="middle">REST / GraphQL / OAuth2 / SSL</text>
+
+    <!-- Connector 1 -->
+    <path d="M 210 125 L 246 125" stroke="#0284c7" stroke-width="2" marker-end="url(#arr1)"/>
+
+    <!-- 2. Salesforce Core Platform -->
+    <rect x="250" y="10" width="220" height="230" rx="8" fill="url(#gradCore)" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="360" y="32" font-family="-apple-system, Arial" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">2. SALESFORCE COMMERCE CORE</text>
+
+    <rect x="262" y="44" width="196" height="38" rx="5" fill="#ffffff" stroke="#4ade80"/>
+    <text x="360" y="62" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#14532d" text-anchor="middle">Order Management (OMS)</text>
+    <text x="360" y="74" font-family="-apple-system, Arial" font-size="8" fill="#166534" text-anchor="middle">Omnichannel BOPIS &amp; BORIS</text>
+
+    <rect x="262" y="88" width="196" height="38" rx="5" fill="#ffffff" stroke="#4ade80"/>
+    <text x="360" y="106" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#14532d" text-anchor="middle">Real-Time Inventory Engine</text>
+    <text x="360" y="118" font-family="-apple-system, Arial" font-size="8" fill="#166534" text-anchor="middle">Instant Multi-Channel Decrement</text>
+
+    <rect x="262" y="132" width="196" height="38" rx="5" fill="#ffffff" stroke="#4ade80"/>
+    <text x="360" y="150" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#14532d" text-anchor="middle">360&deg; Customer Profile (CRM)</text>
+    <text x="360" y="162" font-family="-apple-system, Arial" font-size="8" fill="#166534" text-anchor="middle">Single Customer View &amp; Loyalty</text>
+
+    <rect x="262" y="176" width="196" height="52" rx="5" fill="#f8fafc" stroke="#64748b"/>
+    <text x="360" y="196" font-family="-apple-system, Arial" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">Central DB &amp; Tableau Analytics</text>
+    <text x="360" y="210" font-family="-apple-system, Arial" font-size="7.5" fill="#475569" text-anchor="middle">Single Source of Truth &amp; Margins</text>
+
+    <!-- Connector 2 -->
+    <path d="M 470 125 L 506 125" stroke="#16a34a" stroke-width="2" marker-end="url(#arr2)"/>
+
+    <!-- 3. Fulfillment & Supply Chain -->
+    <rect x="510" y="10" width="200" height="230" rx="8" fill="url(#gradSupp)" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="610" y="32" font-family="-apple-system, Arial" font-size="11" font-weight="bold" fill="#a16207" text-anchor="middle">3. FULFILLMENT &amp; SUPPLY</text>
+
+    <rect x="522" y="44" width="176" height="54" rx="5" fill="#ffffff" stroke="#facc15"/>
+    <text x="610" y="66" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">100+ Retail Stores</text>
+    <text x="610" y="79" font-family="-apple-system, Arial" font-size="8" fill="#854d0e" text-anchor="middle">In-Store Stock &amp; Pickup Counter</text>
+    <text x="610" y="90" font-family="-apple-system, Arial" font-size="7.5" fill="#a16207" text-anchor="middle">&bull; Real-Time Store Sync</text>
+
+    <rect x="522" y="106" width="176" height="54" rx="5" fill="#ffffff" stroke="#facc15"/>
+    <text x="610" y="128" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Central Warehouse</text>
+    <text x="610" y="141" font-family="-apple-system, Arial" font-size="8" fill="#854d0e" text-anchor="middle">Bulk Inventory &amp; Distribution</text>
+    <text x="610" y="152" font-family="-apple-system, Arial" font-size="7.5" fill="#a16207" text-anchor="middle">&bull; Fulfillment Automation</text>
+
+    <rect x="522" y="168" width="176" height="54" rx="5" fill="#ffffff" stroke="#facc15"/>
+    <text x="610" y="190" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Suppliers &amp; Vendors</text>
+    <text x="610" y="203" font-family="-apple-system, Arial" font-size="8" fill="#854d0e" text-anchor="middle">Automated Purchase Orders</text>
+    <text x="610" y="214" font-family="-apple-system, Arial" font-size="7.5" fill="#a16207" text-anchor="middle">&bull; Dynamic Reorder Triggers</text>
+  </svg>
+</div>
+
+<h4>B. End-to-End Omnichannel Checkout &amp; BOPIS Process Flow</h4>
+<div class="diagram-wrapper">
+  <svg viewBox="0 0 720 140" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
+    <!-- Step 1 -->
+    <rect x="10" y="15" width="155" height="110" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+    <rect x="10" y="15" width="155" height="26" rx="6" fill="#0284c7"/>
+    <text x="87" y="32" font-family="-apple-system, Arial" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">1. Discovery &amp; Cart</text>
+    <text x="87" y="58" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Browse item on Web/App</text>
+    <text x="87" y="74" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Query local store stock</text>
+    <text x="87" y="90" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Select "Pickup in Store"</text>
+    <text x="87" y="108" font-family="-apple-system, Arial" font-size="7.5" font-weight="bold" fill="#0284c7" text-anchor="middle">Stock Verified Real-Time</text>
+
+    <!-- Arrow 1 -->
+    <text x="175" y="76" font-family="-apple-system, Arial" font-size="18" fill="#0284c7" text-anchor="middle">&rarr;</text>
+
+    <!-- Step 2 -->
+    <rect x="190" y="15" width="155" height="110" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <rect x="190" y="15" width="155" height="26" rx="6" fill="#16a34a"/>
+    <text x="267" y="32" font-family="-apple-system, Arial" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">2. Checkout &amp; Decrement</text>
+    <text x="267" y="58" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Submit order &amp; pay (&lt;2s)</text>
+    <text x="267" y="74" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Instant stock auto -1</text>
+    <text x="267" y="90" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Payment pre-authorized</text>
+    <text x="267" y="108" font-family="-apple-system, Arial" font-size="7.5" font-weight="bold" fill="#16a34a" text-anchor="middle">No Double-Selling</text>
+
+    <!-- Arrow 2 -->
+    <text x="355" y="76" font-family="-apple-system, Arial" font-size="18" fill="#16a34a" text-anchor="middle">&rarr;</text>
+
+    <!-- Step 3 -->
+    <rect x="370" y="15" width="155" height="110" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <rect x="370" y="15" width="155" height="26" rx="6" fill="#ca8a04"/>
+    <text x="447" y="32" font-family="-apple-system, Arial" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Store Notification</text>
+    <text x="447" y="58" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Pick ticket to Store POS</text>
+    <text x="447" y="74" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Associate packs item</text>
+    <text x="447" y="90" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Customer receives QR code</text>
+    <text x="447" y="108" font-family="-apple-system, Arial" font-size="7.5" font-weight="bold" fill="#a16207" text-anchor="middle">Ready for Pickup</text>
+
+    <!-- Arrow 3 -->
+    <text x="535" y="76" font-family="-apple-system, Arial" font-size="18" fill="#ca8a04" text-anchor="middle">&rarr;</text>
+
+    <!-- Step 4 -->
+    <rect x="550" y="15" width="160" height="110" rx="6" fill="#faf5ff" stroke="#9333ea" stroke-width="1.5"/>
+    <rect x="550" y="15" width="160" height="26" rx="6" fill="#9333ea"/>
+    <text x="630" y="32" font-family="-apple-system, Arial" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">4. Rapid Pickup</text>
+    <text x="630" y="58" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Customer presents QR</text>
+    <text x="630" y="74" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; POS scan &amp; verify (&le;5s)</text>
+    <text x="630" y="90" font-family="-apple-system, Arial" font-size="8.5" fill="#334155" text-anchor="middle">&bull; Order finalized &amp; invoice</text>
+    <text x="630" y="108" font-family="-apple-system, Arial" font-size="7.5" font-weight="bold" fill="#7e22ce" text-anchor="middle">Frictionless Handover</text>
+  </svg>
+</div>
+
+<h3>5.2 Addressing Root Pain Points</h3>
+<ul>
+  <li><strong>Elimination of POS &amp; Web Delays:</strong> Cloud-native architecture delivers sub-2-second web loading and sub-5-second POS transactions via modern payment APIs and Edge CDN caching.</li>
+  <li><strong>Resolution of Stockouts:</strong> Real-Time Inventory Engine synchronizes stock counts across all 50+ stores and warehouses instantaneously, triggering automated supplier purchase orders when inventory reaches safety thresholds.</li>
+  <li><strong>Unified Omnichannel Marketing:</strong> 360&deg; Customer Profile consolidates all purchase histories into a single repository, enabling personalized marketing campaigns, unified cart recovery, and full BOPIS/BORIS support.</li>
+</ul>
+
+<h3>5.3 9-Month Implementation Roadmap</h3>
+<div class="diagram-wrapper">
+  <svg viewBox="0 0 720 135" width="100%" height="125" xmlns="http://www.w3.org/2000/svg">
+    <!-- Phase 1 -->
+    <rect x="10" y="10" width="165" height="115" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+    <rect x="10" y="10" width="165" height="24" rx="6" fill="#0284c7"/>
+    <text x="92" y="26" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Phase 1: Month 1 – 2</text>
+    <text x="92" y="47" font-family="-apple-system, Arial" font-size="8.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Foundation &amp; Planning</text>
+    <text x="92" y="65" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Architecture finalization</text>
+    <text x="92" y="80" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Salesforce tenant setup</text>
+    <text x="92" y="95" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Legacy DB data audit</text>
+    <text x="92" y="110" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Schema mapping &amp; rules</text>
+
+    <!-- Arrow 1 -->
+    <text x="182" y="70" font-family="-apple-system, Arial" font-size="16" fill="#0284c7" text-anchor="middle">&rarr;</text>
+
+    <!-- Phase 2 -->
+    <rect x="190" y="10" width="165" height="115" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <rect x="190" y="10" width="165" height="24" rx="6" fill="#16a34a"/>
+    <text x="272" y="26" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Phase 2: Month 3 – 5</text>
+    <text x="272" y="47" font-family="-apple-system, Arial" font-size="8.5" font-weight="bold" fill="#15803d" text-anchor="middle">Integration &amp; Testing</text>
+    <text x="272" y="65" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Cloud REST API development</text>
+    <text x="272" y="80" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Smart POS &amp; OMS integration</text>
+    <text x="272" y="95" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; 2x Data migration dry runs</text>
+    <text x="272" y="110" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Checksum integrity checks</text>
+
+    <!-- Arrow 2 -->
+    <text x="362" y="70" font-family="-apple-system, Arial" font-size="16" fill="#16a34a" text-anchor="middle">&rarr;</text>
+
+    <!-- Phase 3 -->
+    <rect x="370" y="10" width="165" height="115" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <rect x="370" y="10" width="165" height="24" rx="6" fill="#ca8a04"/>
+    <text x="452" y="26" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Phase 3: Month 6 – 7</text>
+    <text x="452" y="47" font-family="-apple-system, Arial" font-size="8.5" font-weight="bold" fill="#a16207" text-anchor="middle">Pilot &amp; Training</text>
+    <text x="452" y="65" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Pilot at 5 flagship stores</text>
+    <text x="452" y="80" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Live BOPIS workflow test</text>
+    <text x="452" y="95" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; 8-week staff training</text>
+    <text x="452" y="110" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; User Acceptance Testing (UAT)</text>
+
+    <!-- Arrow 3 -->
+    <text x="542" y="70" font-family="-apple-system, Arial" font-size="16" fill="#ca8a04" text-anchor="middle">&rarr;</text>
+
+    <!-- Phase 4 -->
+    <rect x="550" y="10" width="160" height="115" rx="6" fill="#faf5ff" stroke="#9333ea" stroke-width="1.5"/>
+    <rect x="550" y="10" width="160" height="24" rx="6" fill="#9333ea"/>
+    <text x="630" y="26" font-family="-apple-system, Arial" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Phase 4: Month 8 – 9</text>
+    <text x="630" y="47" font-family="-apple-system, Arial" font-size="8.5" font-weight="bold" fill="#7e22ce" text-anchor="middle">Full Cutover &amp; Scaling</text>
+    <text x="630" y="65" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Full 50-store rollout</text>
+    <text x="630" y="80" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Decommission WinCE/Magento</text>
+    <text x="630" y="95" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Peak load optimization</text>
+    <text x="630" y="110" font-family="-apple-system, Arial" font-size="7.5" fill="#334155" text-anchor="middle">&bull; Ready for 100+ stores</text>
+  </svg>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Milestone</th>
+      <th style="width: 18%;">Timeframe</th>
+      <th style="width: 57%;">Key Deliverables &amp; Objective</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Milestone 1: Discovery &amp; Planning</strong></td>
+      <td>Month 1 – 2</td>
+      <td>Finalize solution architecture, configure Salesforce cloud tenant, conduct source data audit, and clean legacy databases.</td>
+    </tr>
+    <tr>
+      <td><strong>Milestone 2: Core Platform &amp; Integration</strong></td>
+      <td>Month 3 – 5</td>
+      <td>Develop REST API integrations between POS, Web, and Inventory Engine; execute 2 Data Migration Dry Runs with Checksum validation.</td>
+    </tr>
+    <tr>
+      <td><strong>Milestone 3: Pilot &amp; Staff Enablement</strong></td>
+      <td>Month 6 – 7</td>
+      <td>Roll out Pilot to 5 flagship stores; conduct 8-week staff training on new POS; validate BOPIS workflows in real-world retail conditions.</td>
+    </tr>
+    <tr>
+      <td><strong>Milestone 4: Full Cutover &amp; Optimization</strong></td>
+      <td>Month 8 – 9</td>
+      <td>Complete full rollout across all 50 stores; deprecate legacy Windows CE/Magento 1.9; optimize performance for holiday season and 100+ store expansion.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
