@@ -12,17 +12,38 @@
 
 ## 2. Tổng hợp Chiến lược Tối ưu Chi phí 4 Thành phần Cốt lõi
 
-```
-                             Chiến lược Tối ưu Chi phí Domain 4
-                                              │
-    ┌───────────────────┬─────────────────────┼─────────────────────┬───────────────────┐
-    ▼                   ▼                     ▼                     ▼                   ▼
- [Storage]          [Compute]            [Databases]            [Network]          [Governance]
-• S3 Lifecycle/     • Right-sizing       • Offload Blob to S3   • Local AZ routing  • Cost Explorer
-  Intelligent Tier  • Spot / Savings     • Read Replicas / Cache• Free VPC Endpoints• Budgets Alerts
-• EBS gp3 vs io2      Plans / RI         • Aurora Serverless    • 1 NAT GW for Dev  • Cost Allocation
-• Delete unattached • Serverless Lambda  • Snapshots Lifecycle  • CloudFront cache    Tags
-  EBS & Snapshots   • ECS Fargate vs EC2                        • VPN for Backup
+```mermaid
+flowchart LR
+    Root["Chiến lược Tối ưu Chi phí Domain 4"]
+
+    Root --> S["💾 Storage (Lưu trữ)"]
+    Root --> C["⚡ Compute (Điện toán)"]
+    Root --> D["🗄️ Databases (Cơ sở dữ liệu)"]
+    Root --> N["🌐 Network (Mạng)"]
+    Root --> G["📊 Governance (Quản trị)"]
+
+    S --> S1["S3 Lifecycle / Intelligent-Tiering"]
+    S --> S2["EBS gp3 thay vì io1/io2"]
+    S --> S3["Xóa Unattached Volumes & Cũ Snapshots"]
+
+    C --> C1["Right-sizing Instance Type / Size"]
+    C --> C2["Spot Instances / Savings Plans / RI"]
+    C --> C3["Serverless Lambda / ECS Fargate"]
+
+    D --> D1["Offload Blobs / Files sang S3"]
+    D --> D2["Read Replicas & Cache (ElastiCache/DAX)"]
+    D --> D3["Aurora Serverless cho tải ngắt quãng"]
+    D --> D4["Quản lý Snapshot Retention Policy"]
+
+    N --> N1["Local AZ Routing (Tránh Cross-AZ)"]
+    N --> N2["VPC Gateway Endpoints miễn phí cho S3/DynamoDB"]
+    N --> N3["1 Shared NAT GW cho môi trường Dev/Test"]
+    N --> N4["CloudFront Cache & Giảm Egress Fee"]
+    N --> N5["Site-to-Site VPN làm Backup cho Direct Connect"]
+
+    G --> G1["Cost Allocation Tags phân loại chi phí"]
+    G --> G2["Cost Explorer & Cost & Usage Report (CUR)"]
+    G --> G3["AWS Budgets đặt ngưỡng & tự động cảnh báo"]
 ```
 
 ---
