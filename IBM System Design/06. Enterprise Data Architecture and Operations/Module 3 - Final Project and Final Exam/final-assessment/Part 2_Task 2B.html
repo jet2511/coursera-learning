@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiHealth Inc. - Data Warehouse Implementation Report</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#e0f2fe',
+            primaryTextColor: '#0369a1',
+            primaryBorderColor: '#38bdf8',
+            lineColor: '#64748b',
+            secondaryColor: '#f0fdf4',
+            tertiaryColor: '#fafafa',
+            fontSize: '9px',
+            fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
+        }
+    });
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @page { size: 210mm 360mm; margin: 6mm 8mm 6mm 8mm; }
+    :root {
+        --primary: #0284c7;
+        --primary-dark: #0369a1;
+        --slate-900: #0f172a;
+        --slate-800: #1e293b;
+        --slate-700: #334155;
+        --slate-600: #475569;
+        --slate-100: #f1f5f9;
+        --slate-50: #f8fafc;
+        --border-color: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--slate-800);
+        line-height: 1.25;
+        font-size: 10px;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 3px;
+        margin-bottom: 4px;
+    }
+    .header-title h1 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--slate-900);
+        margin: 0 0 1px 0;
+        letter-spacing: -0.02em;
+    }
+    .header-title .subtitle { font-size: 9.5px; color: var(--slate-600); font-weight: 500; }
+    .badge-tag {
+        background: linear-gradient(135deg, #0284c7, #0369a1);
+        color: #ffffff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 9px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        background-color: var(--slate-50);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 6px;
+        margin-bottom: 4px;
+    }
+    .meta-item { display: flex; flex-direction: column; }
+    .meta-label { font-size: 7.5px; color: var(--slate-600); text-transform: uppercase; font-weight: 600; }
+    .meta-value { font-size: 9.5px; font-weight: 600; color: var(--slate-900); }
+    h2 {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin: 4px 0 2px 0;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    h2::before {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 10px;
+        background-color: var(--primary);
+        border-radius: 2px;
+    }
+    p, ul { margin: 1px 0 3px 0; }
+    li { margin-bottom: 1px; }
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+    .info-card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 5px;
+    }
+    .info-card-title { font-weight: 700; font-size: 9.5px; color: var(--slate-900); margin-bottom: 1px; }
+    .diagram-section {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 2px 2px;
+        text-align: center;
+        page-break-inside: avoid;
+        margin: 3px 0 4px 0;
+    }
+    .mermaid { display: flex; justify-content: center; }
+    code {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        background-color: var(--slate-100);
+        padding: 1px 2px;
+        border-radius: 2px;
+        color: var(--slate-900);
+        font-size: 8.5px;
+    }
+    .table-spec {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3px 0 4px 0;
+        font-size: 9px;
+    }
+    .table-spec th {
+        background-color: var(--slate-100);
+        color: var(--slate-800);
+        text-align: left;
+        padding: 2px 4px;
+        border: 1px solid var(--border-color);
+        font-weight: 600;
+    }
+    .table-spec td {
+        padding: 2px 4px;
+        border: 1px solid var(--border-color);
+        vertical-align: top;
+    }
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+    }
+    .footer {
+        margin-top: 3px;
+        text-align: right;
+        font-size: 8px;
+        color: var(--slate-600);
+        border-top: 1px solid var(--border-color);
+        padding-top: 1px;
+    }
+</style>
+</head>
+<body>
+<!-- PAGE 1 -->
+<div class="header-container">
+    <div class="header-title">
+        <h1>DigiHealth Inc. &mdash; Data Warehouse Implementation Report</h1>
+        <div class="subtitle">Enterprise Data Architecture & Operations | Part 2: Deliverable</div>
+    </div>
+    <div class="badge-tag">Part 2_Task 2B</div>
+</div>
+<div class="meta-grid">
+    <div class="meta-item"><span class="meta-label">Project</span><span class="meta-value">DigiHealth Modernization</span></div>
+    <div class="meta-item"><span class="meta-label">Model Architecture</span><span class="meta-value">Star Schema (OLAP)</span></div>
+    <div class="meta-item"><span class="meta-label">Target Warehouse</span><span class="meta-value">PostgreSQL 12+</span></div>
+    <div class="meta-item"><span class="meta-label">Compliance</span><span class="meta-value">HIPAA & GDPR Ready</span></div>
+</div>
+<h2>1. Executive Summary & Architectural Drivers</h2>
+<p>The DigiHealth Enterprise Data Architecture modernization initiative transitions the healthcare system to a high-performance <strong>OLAP Data Warehouse</strong>:</p>
+<div class="card-grid">
+    <div class="info-card">
+        <div class="info-card-title">&#128279; 1. Eliminate Data Silos</div>
+        <div>Unifies transactional data across clinical, financial, and administrative hospital departments into a single source of truth.</div>
+    </div>
+    <div class="info-card">
+        <div class="info-card-title">&#9889; 2. Workload Decoupling</div>
+        <div>Isolates resource-intensive analytical queries from the MySQL OLTP engine, eliminating transaction latency.</div>
+    </div>
+    <div class="info-card">
+        <div class="info-card-title">&#128202; 3. Advanced BI & Analytics</div>
+        <div>Enables multi-dimensional slice-and-dice reporting on clinical throughput, revenue cycle, and physician productivity.</div>
+    </div>
+    <div class="info-card">
+        <div class="info-card-title">&#128274; 4. Governance & Compliance</div>
+        <div>Ensures end-to-end security compliance (HIPAA/GDPR) via Role-Based Access Control, PHI tokenization, and audit logging.</div>
+    </div>
+</div>
+<h2>2. Dimensional Schema Model (Star Schema)</h2>
+<p>The PostgreSQL Data Warehouse implements a <strong>Star Schema</strong> with pre-joined dimensional contexts surrounding the core clinical encounter facts:</p>
+<div class="diagram-section">
+<pre class="mermaid">
+erDiagram
+    FACT_APPOINTMENTS }o--|| DIM_PATIENT : "analyzed_by"
+    FACT_APPOINTMENTS }o--|| DIM_DOCTOR : "analyzed_by"
+    FACT_APPOINTMENTS }o--|| DIM_DATE : "occurred_on"
+    FACT_APPOINTMENTS }o--|| DIM_SERVICE : "categorized_by"
+
+    DIM_PATIENT {
+        int patient_key PK
+        int patient_id
+        string full_name
+        string gender
+        int birth_year
+        string age_group
+        string city
+    }
+
+    DIM_DOCTOR {
+        int doctor_key PK
+        int doctor_id
+        string doctor_name
+        string specialization
+        string department_name
+        string clinic_location
+    }
+
+    DIM_DATE {
+        int date_key PK
+        date full_date
+        int day_number
+        string day_name
+        int month_number
+        string month_name
+        int quarter
+        int year
+        boolean is_weekend
+    }
+
+    DIM_SERVICE {
+        int service_key PK
+        string service_code
+        string service_name
+        string service_category
+        decimal standard_cost
+    }
+
+    FACT_APPOINTMENTS {
+        bigint appointment_fact_id PK
+        int patient_key FK
+        int doctor_key FK
+        int date_key FK
+        int service_key FK
+        int appointment_id
+        decimal consultation_fee
+        decimal total_billed_amount
+        int visit_duration_minutes
+        int appointment_count
+        int is_completed
+    }
+</pre>
+</div>
+<div class="footer">Page 1 of 2 &bull; DigiHealth Modernization Initiative &bull; Confidential</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 2 -->
+<h2>3. Fact & Dimension Tables Specification</h2>
+<table class="table-spec">
+    <thead>
+        <tr>
+            <th style="width: 22%;">Table Name</th>
+            <th style="width: 14%;">Type</th>
+            <th style="width: 26%;">Keys</th>
+            <th style="width: 38%;">Description & Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>dim_patient</code></td>
+            <td>Dimension</td>
+            <td><code>patient_key</code> (Surrogate PK)<br><code>patient_id</code> (Natural Key)</td>
+            <td>Patient demographic profiles with age brackets and tokenized PHI fields for HIPAA-compliant clinical analytics.</td>
+        </tr>
+        <tr>
+            <td><code>dim_doctor</code></td>
+            <td>Dimension</td>
+            <td><code>doctor_key</code> (Surrogate PK)<br><code>doctor_id</code> (Natural Key)</td>
+            <td>Physician credentials, specialty areas, and associated hospital department hierarchies.</td>
+        </tr>
+        <tr>
+            <td><code>dim_date</code></td>
+            <td>Dimension</td>
+            <td><code>date_key</code> (Integer YYYYMMDD)</td>
+            <td>Pre-calculated calendar table with day, month, quarter, and weekend flags for high-speed time-series analysis.</td>
+        </tr>
+        <tr>
+            <td><code>dim_service</code></td>
+            <td>Dimension</td>
+            <td><code>service_key</code> (Surrogate PK)</td>
+            <td>Standardized catalog of medical consultations, treatments, procedures, and baseline fees.</td>
+        </tr>
+        <tr>
+            <td><code>fact_appointments</code></td>
+            <td>Fact Table</td>
+            <td><code>appointment_fact_id</code> (PK)<br>Dimension FKs</td>
+            <td>Granular metrics per encounter: <code>consultation_fee</code>, <code>total_billed_amount</code>, <code>visit_duration_minutes</code>, <code>appointment_count</code>.</td>
+        </tr>
+    </tbody>
+</table>
+<h2>4. End-to-End ETL Pipeline Architecture</h2>
+<p>The automated data ingestion framework extracts delta logs from MySQL and transforms them into analytical dimensions and facts in PostgreSQL:</p>
+<div class="diagram-section">
+<pre class="mermaid">
+flowchart TD
+    subgraph S1["1. Source Layer"]
+        OLTP["MySQL OLTP Database<br>(Patients, Doctors, Appointments, Billing)"]
+    end
+    subgraph S2["2. Extraction Layer"]
+        CDC["CDC / Batch Delta Extractor<br>(Captures updated/new records)"]
+    end
+    subgraph S3["3. Transformation Layer"]
+        CLEAN["Data Cleansing & Deduplication"]
+        MASK["PHI Masking & Tokenization (HIPAA/GDPR)"]
+        LOOKUP["Surrogate Key Lookup (Dim Tables)"]
+        AGG["Fact & Metric Calculation"]
+    end
+    subgraph S4["4. Loading Layer"]
+        STAGE["PostgreSQL Staging Area"]
+        DWH["PostgreSQL Data Warehouse<br>(Star Schema Tables)"]
+    end
+    OLTP --> CDC
+    CDC --> CLEAN
+    CLEAN --> MASK
+    MASK --> LOOKUP
+    LOOKUP --> AGG
+    AGG --> STAGE
+    STAGE --> DWH
+</pre>
+</div>
+<h2>5. Data Governance, Security & Compliance Controls</h2>
+<div class="card-grid">
+    <div class="info-card">
+        <div class="info-card-title">&#128101; Role-Based Access Control (RBAC)</div>
+        <div>Clinical staff access anonymized aggregates; Financial teams access billing dimensions; System DBAs retain administrative privileges.</div>
+    </div>
+    <div class="info-card">
+        <div class="info-card-title">&#128737; HIPAA & GDPR Compliance</div>
+        <div>Transparent Data Encryption (AES-256) at rest, TLS 1.3 in transit, and pseudonymization of direct patient identifiers.</div>
+    </div>
+</div>
+<div class="footer">Page 2 of 2 &bull; DigiHealth Modernization Initiative &bull; Confidential</div>
+</body>
+</html>
