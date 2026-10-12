@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiHealth Inc. - Part 1: ERD & 3NF OLTP Schema Design</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#e0f2fe',
+            primaryTextColor: '#0369a1',
+            primaryBorderColor: '#38bdf8',
+            lineColor: '#64748b',
+            secondaryColor: '#f0fdf4',
+            tertiaryColor: '#fafafa',
+            fontSize: '9.5px',
+            fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
+        }
+    });
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @page { size: 210mm 400mm; margin: 6mm 8mm 6mm 8mm; }
+    :root {
+        --primary: #0284c7;
+        --primary-dark: #0369a1;
+        --slate-900: #0f172a;
+        --slate-800: #1e293b;
+        --slate-700: #334155;
+        --slate-600: #475569;
+        --slate-100: #f1f5f9;
+        --slate-50: #f8fafc;
+        --border-color: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--slate-800);
+        line-height: 1.25;
+        font-size: 10px;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 3px;
+        margin-bottom: 4px;
+    }
+    .header-title h1 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--slate-900);
+        margin: 0 0 1px 0;
+        letter-spacing: -0.02em;
+    }
+    .header-title .subtitle { font-size: 9.5px; color: var(--slate-600); font-weight: 500; }
+    .badge-tag {
+        background: linear-gradient(135deg, #0284c7, #0369a1);
+        color: #ffffff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 9px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        background-color: var(--slate-50);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 6px;
+        margin-bottom: 4px;
+    }
+    .meta-item { display: flex; flex-direction: column; }
+    .meta-label { font-size: 7.5px; color: var(--slate-600); text-transform: uppercase; font-weight: 600; }
+    .meta-value { font-size: 9.5px; font-weight: 600; color: var(--slate-900); }
+    h2 {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin: 4px 0 2px 0;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    h2::before {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 10px;
+        background-color: var(--primary);
+        border-radius: 2px;
+    }
+    .entity-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+    .entity-card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 5px;
+        border-left: 2.5px solid var(--primary);
+    }
+    .entity-name {
+        font-weight: 700;
+        font-size: 9.5px;
+        color: var(--slate-900);
+        margin-bottom: 1px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .entity-attrs {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 8px;
+        color: var(--slate-700);
+        line-height: 1.2;
+    }
+    .pk { color: #b91c1c; font-weight: 600; }
+    .fk { color: #0369a1; font-weight: 600; }
+    .norm-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+    .norm-card {
+        background: var(--slate-50);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 5px;
+    }
+    .norm-title { font-size: 9px; font-weight: 700; color: var(--slate-900); margin-bottom: 1px; }
+    .norm-desc { font-size: 8px; color: var(--slate-600); line-height: 1.15; }
+    .diagram-section {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 2px 2px;
+        text-align: center;
+        page-break-inside: avoid;
+    }
+    .mermaid { display: flex; justify-content: center; }
+    .footer {
+        margin-top: 3px;
+        text-align: right;
+        font-size: 8px;
+        color: var(--slate-600);
+        border-top: 1px solid var(--border-color);
+        padding-top: 1px;
+    }
+</style>
+</head>
+<body>
+<div class="header-container">
+    <div class="header-title">
+        <h1>DigiHealth Inc. &mdash; OLTP Architecture & ERD</h1>
+        <div class="subtitle">Enterprise Data Architecture & Operations | Part 1: Deliverable</div>
+    </div>
+    <div class="badge-tag">Part 1_Task 1</div>
+</div>
+<div class="meta-grid">
+    <div class="meta-item"><span class="meta-label">Project</span><span class="meta-value">DigiHealth Modernization</span></div>
+    <div class="meta-item"><span class="meta-label">System Type</span><span class="meta-value">OLTP (Transactional)</span></div>
+    <div class="meta-item"><span class="meta-label">Target RDBMS</span><span class="meta-value">MySQL 8.0 (InnoDB)</span></div>
+    <div class="meta-item"><span class="meta-label">Normalization</span><span class="meta-value">Third Normal Form (3NF)</span></div>
+</div>
+<h2>1. Core Normalized Entities & Attributes</h2>
+<div class="entity-grid">
+    <div class="entity-card">
+        <div class="entity-name"><span>PATIENTS</span><span style="font-size:8px;color:var(--slate-600)">Patient Registry</span></div>
+        <div class="entity-attrs"><span class="pk">patient_id (PK)</span>, first_name, last_name, date_of_birth, gender, contact_number, email, address, created_at</div>
+    </div>
+    <div class="entity-card">
+        <div class="entity-name"><span>DOCTORS</span><span style="font-size:8px;color:var(--slate-600)">Clinical Staff</span></div>
+        <div class="entity-attrs"><span class="pk">doctor_id (PK)</span>, first_name, last_name, specialization, contact_number, email, <span class="fk">department_id (FK)</span>, created_at</div>
+    </div>
+    <div class="entity-card">
+        <div class="entity-name"><span>DEPARTMENTS</span><span style="font-size:8px;color:var(--slate-600)">Hospital Units</span></div>
+        <div class="entity-attrs"><span class="pk">department_id (PK)</span>, department_name, location, created_at</div>
+    </div>
+    <div class="entity-card">
+        <div class="entity-name"><span>APPOINTMENTS</span><span style="font-size:8px;color:var(--slate-600)">Encounters</span></div>
+        <div class="entity-attrs"><span class="pk">appointment_id (PK)</span>, <span class="fk">patient_id (FK)</span>, <span class="fk">doctor_id (FK)</span>, appointment_date, appointment_time, status, reason_for_visit</div>
+    </div>
+    <div class="entity-card">
+        <div class="entity-name"><span>MEDICAL_RECORDS</span><span style="font-size:8px;color:var(--slate-600)">Clinical History</span></div>
+        <div class="entity-attrs"><span class="pk">record_id (PK)</span>, <span class="fk">patient_id (FK)</span>, <span class="fk">doctor_id (FK)</span>, diagnosis, prescription, treatment_notes, record_date</div>
+    </div>
+    <div class="entity-card">
+        <div class="entity-name"><span>BILLING</span><span style="font-size:8px;color:var(--slate-600)">Financial Ledger</span></div>
+        <div class="entity-attrs"><span class="pk">bill_id (PK)</span>, <span class="fk">patient_id (FK)</span>, <span class="fk">appointment_id (FK)</span>, total_amount, payment_status, payment_method, billing_date</div>
+    </div>
+</div>
+<h2>2. Normalization Strategy & Integrity Analysis</h2>
+<div class="norm-box">
+    <div class="norm-card">
+        <div class="norm-title">1NF &bull; Atomicity & Unique Keys</div>
+        <div class="norm-desc">Atomic attributes, elimination of repeating columns, single unique primary key per table.</div>
+    </div>
+    <div class="norm-card">
+        <div class="norm-title">2NF &bull; Full Functional Dependency</div>
+        <div class="norm-desc">Elimination of partial dependencies; all attributes strictly depend on full primary keys.</div>
+    </div>
+    <div class="norm-card">
+        <div class="norm-title">3NF &bull; Transitive Decoupling</div>
+        <div class="norm-desc">Elimination of transitive dependencies ($X ightarrow Y ightarrow Z$); departments isolated to prevent anomalies.</div>
+    </div>
+</div>
+<h2>3. Entity-Relationship Diagram (OLTP 3NF Model)</h2>
+<div class="diagram-section">
+<pre class="mermaid">
+erDiagram
+    PATIENTS ||--o{ APPOINTMENTS : "schedules"
+    PATIENTS ||--o{ MEDICAL_RECORDS : "has"
+    PATIENTS ||--o{ BILLING : "incurs"
+    DOCTORS ||--o{ APPOINTMENTS : "attends"
+    DOCTORS ||--o{ MEDICAL_RECORDS : "creates"
+    DEPARTMENTS ||--o{ DOCTORS : "belongs_to"
+    APPOINTMENTS ||--o| BILLING : "generates"
+
+    PATIENTS {
+        int patient_id PK
+        string first_name
+        string last_name
+        date date_of_birth
+        string gender
+        string contact_number
+        string email
+        string address
+    }
+
+    DEPARTMENTS {
+        int department_id PK
+        string department_name
+        string location
+    }
+
+    DOCTORS {
+        int doctor_id PK
+        string first_name
+        string last_name
+        string specialization
+        int department_id FK
+        string contact_number
+        string email
+    }
+
+    APPOINTMENTS {
+        int appointment_id PK
+        int patient_id FK
+        int doctor_id FK
+        date appointment_date
+        time appointment_time
+        string status
+        string reason_for_visit
+    }
+
+    MEDICAL_RECORDS {
+        int record_id PK
+        int patient_id FK
+        int doctor_id FK
+        string diagnosis
+        string prescription
+        date record_date
+    }
+
+    BILLING {
+        int bill_id PK
+        int patient_id FK
+        int appointment_id FK
+        decimal total_amount
+        string payment_status
+        string payment_method
+        date billing_date
+    }
+</pre>
+</div>
+<div class="footer">
+    DigiHealth Modernization Initiative &bull; Confidential &bull; Enterprise Data Architecture & Operations
+</div>
+</body>
+</html>
