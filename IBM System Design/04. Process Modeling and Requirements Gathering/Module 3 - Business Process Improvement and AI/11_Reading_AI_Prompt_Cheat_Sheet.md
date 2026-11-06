@@ -1,0 +1,30 @@
+# Reading: AI Prompt Cheat Sheet: Modeling, Mapping, and Process Improvement
+
+## 1. Nguyên tắc cốt lõi trong Viết Prompt (Core Formula)
+- **Bản chất của AI:** AI giống như một trợ lý thông minh nhưng hiểu theo nghĩa đen (*capable but literal assistant*). Nếu được cung cấp rõ ràng về **Mục đích (Purpose)**, **Ngữ cảnh (Context)**, và **Cấu trúc (Structure)**, AI có thể chuyển đổi các bản tường giải phức tạp thành mô hình trực quan, bảng cải tiến và báo cáo chuyên nghiệp chỉ trong vài giây.
+- **Công thức vàng viết Prompt:**
+  $$\mathbf{Prompt} = \mathbf{Action}\;(\text{Hành động}) + \mathbf{Object}\;(\text{Đối tượng}) + \mathbf{Context}\;(\text{Ngữ cảnh \& Ràng buộc})$$
+  - *Ví dụ mẫu:* `"Generate a BPMN diagram"` (*Action*) + `"for the purchase approval process"` (*Object*) + `"showing approval thresholds and system interactions"` (*Context*).
+
+---
+
+## 2. Bảng tra cứu Prompt Cheat Sheet theo từng bài toán nghiệp vụ
+
+| Lĩnh vực / Hạng mục | Thông tin ngữ cảnh cần cung cấp cho AI | 5 Mẫu Prompt thực chiến |
+| :--- | :--- | :--- |
+| **1. Process Modeling** *(Mô hình hóa quy trình)* | Mục tiêu quy trình, các phòng ban/chức năng chính, điểm bắt đầu và kết thúc, các mối phụ thuộc đã biết. | 1. *"Generate a high-level process model illustrating how customer orders flow through sales, production, and shipping."*<br>2. *"Create a BPMN model showing main activities, decision points, and feedback loops."*<br>3. *"Identify dependencies between marketing, operations, and finance processes."*<br>4. *"Visualize how this process integrates across departments."*<br>5. *"Produce a model distinguishing between core and support processes."* |
+| **2. Process Mapping** *(Lập bản đồ quy trình)* | Vai trò/phòng ban, các bước lớn trong quy trình, điểm ra quyết định (decisions) và điểm bàn giao (handoffs). | 1. *"Create a swimlane diagram showing interactions among Customer, Sales, and Warehouse."*<br>2. *"Generate a flowchart for the order fulfillment process with key decision points."*<br>3. *"Draft a BPMN diagram identifying automation opportunities."*<br>4. *"Visualize the steps for handling customer complaints."*<br>5. *"Convert this text description into a process map highlighting bottlenecks."* |
+| **3. Process Narrative** *(Bản tường giải quy trình)* | Sơ đồ luồng, vai trò chịu trách nhiệm, mục đích quy trình, chi tiết cụ thể ở từng bước. | 1. *"Write a detailed narrative to accompany this process map."*<br>2. *"Translate this workflow into a paragraph-based process description."*<br>3. *"Add rationale and exceptions for each step in this process."*<br>4. *"Generate a narrative suitable for an SOP (Standard Operating Procedure)."*<br>5. *"Simplify this process map narrative for a training handout."* |
+| **4. Future-State Design** *(Thiết kế quy trình tương lai To-Be)* | Tóm tắt quy trình hiện tại, các điểm đau (*pain points*), mục tiêu cải tiến, các bước nhắm đến tự động hóa. | 1. *"Redesign this process to reduce delays and errors."*<br>2. *"Show a future-state flow that includes AI-based verification."*<br>3. *"Optimize this workflow for automation."*<br>4. *"Highlight rework loops to be eliminated."*<br>5. *"Propose three efficiency improvements in a revised map."* |
+| **5. SIPOC Analysis** *(Phân tích ma trận SIPOC)* | Mô tả cấp cao về quy trình, các bên liên quan chính (*stakeholders*), kết quả đầu ra cho khách hàng. | 1. *"Create a SIPOC table for the returns process."*<br>2. *"List 4–5 elements under each SIPOC category."*<br>3. *"Visualize Suppliers, Inputs, Process, Outputs, and Customers."*<br>4. *"Summarize SIPOC findings for management review."*<br>5. *"Generate a SIPOC from this narrative."* |
+| **6. Use Cases & Scenarios** *(Kịch bản ca sử dụng & Ngoại lệ)* | Vai trò người dùng (actors), biên giới hệ thống (system boundaries), luồng chính (happy path), các ngoại lệ. | 1. *"Build a use-case diagram showing user-system interactions."*<br>2. *"List five test scenarios, including exceptions."*<br>3. *"Generate alternate paths for failed transactions."*<br>4. *"Describe preconditions and postconditions for each case."*<br>5. *"Summarize actors and their system touchpoints."* |
+| **7. Requirements Categorization (FURPS)** *(Phân loại yêu cầu)* | Danh sách yêu cầu/tính năng hệ thống, các lo ngại về hiệu năng hoặc trải nghiệm người dùng. | 1. *"Categorize requirements into Functionality, Usability, Reliability, Performance, and Supportability."*<br>2. *"Generate a chart summarizing the requirement distribution."*<br>3. *"Highlight high-risk usability gaps."*<br>4. *"Suggest metrics for each FURPS category."*<br>5. *"Create a stakeholder summary report by FURPS dimension."* |
+| **8. Improvement Prioritization** *(Ưu tiên hóa cải tiến)* | Danh sách ý tưởng cải tiến, tiêu chí chấm điểm (impact, cost, risk), mốc thời gian kỳ vọng. | 1. *"Create an Impact vs. Effort prioritization matrix."*<br>2. *"Rank opportunities by customer impact and cost."*<br>3. *"Highlight two quick wins and two strategic projects."*<br>4. *"Propose sequencing for implementation."*<br>5. *"Summarize improvement recommendations for leadership."* |
+| **9. Risk Overlay / Mitigation** *(Lớp phủ & Giảm thiểu rủi ro)* | Sơ đồ quy trình, các loại rủi ro, định nghĩa xác suất/tác động, điều kiện kích hoạt (triggers). | 1. *"Add risk icons to steps prone to delays or errors."*<br>2. *"Categorize risks by cost, quality, or customer impact."*<br>3. *"Summarize risk triggers and response plans."*<br>4. *"Generate a risk heat map for the process."*<br>5. *"Identify opportunities (positive risks) for efficiency gains."* |
+
+---
+
+## 3. Các kỹ thuật tối ưu Prompt chuyên sâu
+- **Generic vs. Domain-specific:** Luôn tùy biến prompt theo ngữ cảnh ngành (bán lẻ, ngân hàng, sản xuất) thay vì dùng câu lệnh chung chung.
+- **Yêu cầu lập luận & Căn cứ (Reasoning Steps):** Yêu cầu AI đưa ra lý lẽ (*justification*), bằng chứng và các bước suy luận thay vì chỉ đưa ra câu trả lời cụt lủn.
+- **Đánh giá & Tinh chỉnh lặp lại (Iterative Refinement):** Kiểm thử output bước đầu, thêm các ràng buộc hoặc sửa đổi chi tiết để AI tinh chỉnh đạt chuẩn mong muốn.
