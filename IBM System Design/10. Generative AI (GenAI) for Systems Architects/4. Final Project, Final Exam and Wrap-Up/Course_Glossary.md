@@ -1,0 +1,59 @@
+# Course Glossary: Generative AI for Solutions Architects and Systems Analysts
+
+Bảng thuật ngữ tra cứu chuyên ngành dành cho Solutions Architects, Systems Analysts và Kỹ sư hệ thống khi ứng dụng Generative AI vào phân tích, thiết kế và quản lý dự án.
+
+---
+
+| Thuật ngữ (Term) | Định nghĩa (Definition) | Giải thích / Ngữ cảnh ứng dụng |
+| :--- | :--- | :--- |
+| **Acceptance criteria** | Tập hợp các điều kiện rõ ràng mà một hệ thống hoặc tính năng phải đáp ứng để một user story được coi là hoàn thành và chấp nhận được. | Thường viết dưới dạng Gherkin (`Given/When/Then`) để làm tiêu chí nghiệm thu UAT. |
+| **AI-driven communication plan** | Kế hoạch giao tiếp có cấu trúc được sinh tự động bởi GenAI, xác định rõ stakeholders, thông điệp cốt lõi, kênh và thời điểm cập nhật dự án. | Giúp tự động hóa báo cáo trạng thái, giảm thiểu chi phí quản lý dự án. |
+| **AI-generated artifact** | Tài liệu, biểu mẫu, template hoặc sơ đồ chuyên nghiệp được tạo ra bằng GenAI nhằm tăng tốc quá trình làm tài liệu dự án và đảm bảo tính nhất quán. | Ví dụ: BPMN diagrams, User Stories, test cases, executive briefs. |
+| **AI-powered validation report** | Báo cáo tóm tắt do AI tạo ra để đánh giá kết quả kiểm thử, phát hiện quy luật lỗi và đề xuất phương án khắc phục. | Hỗ trợ QA/BA nhanh chóng tìm nguyên nhân gốc rễ (RCA) của bug. |
+| **Application programming interface (API)** | Tập hợp các quy tắc và kết nối cho phép các ứng dụng phần mềm giao tiếp và trao đổi dữ liệu với nhau. | Nền tảng tích hợp microservices và dịch vụ bên thứ ba (KYC, Credit Bureau...). |
+| **Assumptions** | Các nhận định được coi là đúng mà không cần bằng chứng trực tiếp trong quá trình lấy yêu cầu hoặc thiết kế, dùng làm cơ sở để lập kế hoạch. | Cần được ghi vào Risk & Assumption Log để xác minh trong giai đoạn sau. |
+| **Backend** | Phần hệ thống phần mềm xử lý logic dữ liệu, lưu trữ và các tác vụ server-side ẩn sau giao diện người dùng. | Chứa Core Banking, Database, Service orchestration, Rules Engine. |
+| **Baseline requirement document** | Phiên bản hoàn thiện của tài liệu yêu cầu đóng vai trò làm mốc tham chiếu chuẩn cho việc phân tích, thiết kế và kiểm thử. | Cơ sở để quản lý Scope Creep và đối chiếu nghiệm thu dự án. |
+| **Benchmarking** | Quá trình so sánh hiệu năng hệ thống hoặc quy trình với các tiêu chuẩn chuẩn mực hoặc best practices để tìm điểm cải thiện. | Đo lường độ trễ (latency), thông lượng (throughput), tỷ lệ hoàn tất onboarding. |
+| **Business process model and notation (BPMN)** | Phương pháp đồ họa chuẩn hóa để trực quan hóa quy trình nghiệp vụ bằng các ký hiệu thể hiện nhiệm vụ (tasks), quyết định (gateways) và luồng (flows). | Công cụ chuẩn để mô hình hóa quy trình To-Be giữa BA, Tech Lead và Ops. |
+| **Checklist** | Danh sách các hạng mục hoặc hành động có cấu trúc dùng để xác minh mọi bước trong quy trình, kiểm thử hoặc triển khai được hoàn tất chính xác. | Ngăn ngừa sót lỗi vận hành (Pre-deployment, UAT, Rollback checklist). |
+| **Communication template** | Khung mẫu thông điệp tái sử dụng do AI tạo ra, cấu trúc hóa các bản cập nhật dự án như email gửi stakeholder hoặc biên bản cuộc họp. | Chuẩn hóa giọng điệu và định dạng truyền thông nội bộ/khách hàng. |
+| **Constraint** | Ràng buộc hoặc hạn chế về phạm vi, nguồn lực hoặc hiệu năng hệ thống cần phải tính đến khi lập kế hoạch. | Ví dụ: Ngân sách, deadline, công nghệ bắt buộc, quy định pháp lý địa phương. |
+| **Customer journey map** | Sơ đồ trực quan thể hiện các giai đoạn khách hàng trải nghiệm khi tương tác với sản phẩm/dịch vụ, gồm hành động, cảm xúc và điểm nghẽn. | 5 giai đoạn kinh điển: Discover → Apply → Pre-approve → Verify → Fund. |
+| **Data flow diagram (DFD)** | Biểu diễn trực quan cách dữ liệu di chuyển giữa các đầu vào (inputs), quy trình xử lý (processes) và đầu ra (outputs) trong hệ thống. | Thể hiện luồng dữ liệu 2 chiều giữa Web/Mobile, API Gateway và 3rd-party services. |
+| **Deployment checklist** | Danh sách các bước triển khai chi tiết theo môi trường cụ thể, do AI tạo ra để đảm bảo release an toàn và trọn vẹn. | Kiểm tra migration DB, biến môi trường, canary routing, credentials. |
+| **Deployment environment** | Môi trường nơi phần mềm vận hành (Development, Staging, UAT, Production). | Cách ly dữ liệu thật và dữ liệu test, bảo vệ môi trường live. |
+| **Edge case** | Kịch bản xảy ra trong điều kiện cực hạn hoặc bất thường, cần kiểm thử để đảm bảo hệ thống xử lý ổn định trước dữ liệu dị thường. | Ví dụ: 3rd-party timeout đúng lúc người dùng submit, rớt mạng giữa chừng. |
+| **Executive summary** | Bản tóm tắt cấp cao ngắn gọn do AI tạo ra, làm nổi bật các quyết định, hành động và kết quả chính từ báo cáo hoặc cuộc họp. | Dành cho C-level/Sponsor xem nhanh ROI, tiến độ, rủi ro chính. |
+| **Functional requirement (FR)** | Mô tả những gì hệ thống phải thực hiện, tập trung vào tính năng, hành vi và tương tác người dùng có thể thấy được. | Ví dụ: Cho phép khách hàng nhập thông tin KYC, trả lời kết quả duyệt vay. |
+| **Generative artificial intelligence (GenAI)** | Nhánh trí tuệ nhân tạo có khả năng tạo ra văn bản, hình ảnh, mã nguồn hoặc dữ liệu mới bằng cách học từ thông tin sẵn có. | LLM (GPT, Claude, Gemini) hỗ trợ BA/SA tăng tốc tài liệu hóa và mô hình hóa. |
+| **Given / when / then format** | Định dạng có cấu trúc để định nghĩa kịch bản kiểm thử: Điều kiện tiền đề (Given), Hành động (When), Kết quả kỳ vọng (Then). | Cú pháp Gherkin chuẩn dùng trong BDD (Behavior-Driven Development). |
+| **Integration point** | Điểm kết nối nơi hai hệ thống, thành phần hoặc quy trình trao đổi dữ liệu hoặc tương tác với nhau. | Điểm gọi REST/gRPC/Kafka giữa Gateway và Core Banking hoặc Bureau API. |
+| **Iterative prompt refinement** | Quá trình cải tiến prompt liên tục bằng cách thêm ngữ cảnh, ràng buộc và tiêu chí rõ ràng cho đến khi AI trả về kết quả đạt yêu cầu. | Kỹ năng cốt lõi của Prompt Engineering khi làm việc với GenAI. |
+| **Load testing** | Quá trình đánh giá hiệu năng hệ thống dưới áp lực tải người dùng cao hoặc điều kiện căng thẳng (stress test). | Đảm bảo hệ thống đạt SLA dưới tải đột biến (ví dụ chiến dịch khuyến mãi vay). |
+| **Message flow** | Trong BPMN, đường đứt nét thể hiện việc giao tiếp hoặc trao đổi thông tin giữa các bên tham gia (pools/lanes) hoặc hệ thống khác nhau. | Phân biệt với Sequence flow (luồng thực thi nội bộ trong cùng một lane). |
+| **Multilingual collaboration** | Việc ứng dụng AI để dịch thuật, tóm tắt và điều chỉnh thông điệp cho đội ngũ làm việc đa quốc gia và đa văn hóa. | Giúp BA/SA viết brief, specs song ngữ (Anh - Tây Ban Nha/Pháp/Việt). |
+| **Negative test case** | Kịch bản kiểm thử được thiết kế có chủ đích với dữ liệu đầu vào sai, thiếu hoặc bất thường để kiểm tra khả năng bắt lỗi của hệ thống. | Ví dụ: Nhập sai định dạng số định danh/SSN, KYC trả về kết quả fail. |
+| **Non-functional requirement (NFR)** | Mô tả các thuộc tính chất lượng của hệ thống như hiệu năng, bảo mật, khả năng sử dụng, tính sẵn sàng (Availability, RTO/RPO). | Định hình kiến trúc hạ tầng và tiêu chuẩn kỹ thuật (ví dụ SLA < 3 phút, TLS 1.3). |
+| **Performance testing** | Đánh giá tốc độ phản hồi và tính hiệu quả tài nguyên của hệ thống dưới khối lượng công việc dự kiến. | Xác minh p95/p99 latency có đáp ứng tiêu chuẩn trải nghiệm hay không. |
+| **Process modeling** | Hoạt động trực quan hóa quy trình kinh doanh hoặc kỹ thuật để phân tích, tối ưu hóa hoặc tự động hóa luồng công việc. | Dùng BPMN, Flowchart, Activity diagrams để làm rõ luồng To-Be. |
+| **Prompt engineering** | Nghệ thuật và kỹ thuật viết các chỉ dẫn rõ ràng, cụ thể và có cấu trúc để điều hướng AI sinh ra kết quả chính xác, hữu ích nhất. | Bao gồm định nghĩa Role, Context, Constraints, Task và Output Format. |
+| **Requirement gathering** | Quá trình thu thập nhu cầu, kỳ vọng và vấn đề của các bên liên quan để xác định hệ thống cần giải quyết điều gì. | Gồm phỏng vấn, khảo sát, quan sát và rà soát tài liệu nghiệp vụ. |
+| **Requirement validation** | Hoạt động đảm bảo các yêu cầu đã ghi nhận phản ánh chính xác mục tiêu của stakeholder và có tính khả thi kỹ thuật. | Đánh giá qua review chéo, prototype, mô phỏng phản biện (Devil's advocate). |
+| **Rollback plan** | Chiến lược xác định trước để đưa hệ thống quay trở lại trạng thái ổn định gần nhất nếu quá trình deployment gặp sự cố nghiêm trọng. | Bao gồm trigger rollback, người phê duyệt, script tự động và bảo toàn data. |
+| **Service task** | Trong BPMN, một tác vụ tự động được thực hiện hoàn toàn bởi hệ thống phần mềm mà không cần con người can thiệp. | Ví dụ: Tự động gọi API Bureau, tự động sinh điểm tín dụng, ghi log. |
+| **Simulation scenario** | Kịch bản đóng vai (role-play) hoặc ca mô phỏng do AI tạo ra để bắt chước phỏng vấn stakeholder hoặc phản ứng hệ thống. | Hỗ trợ BA luyện tập phỏng vấn và khám phá các edge cases còn ẩn. |
+| **Stakeholder** | Bất kỳ cá nhân hoặc tổ chức nào bị ảnh hưởng bởi, tham gia vào, hoặc có quyền can thiệp vào kết quả của dự án. | Phân nhóm: Product, Compliance, Operations, IT, End-user. |
+| **Stakeholder interview template** | Bộ câu hỏi có cấu trúc được thiết kế riêng cho từng nhóm stakeholder nhằm thu thập thông tin và hiểu sâu về bài toán. | Template phân theo vai trò: Kinh doanh, Pháp chế, Vận hành, Công nghệ. |
+| **Stakeholder map** | Sơ đồ hoặc bảng do AI hỗ trợ phân loại các bên liên quan dựa trên Quyền lực (Power) và Mức độ quan tâm (Interest). | Mô hình Power/Interest Grid: Manage Closely, Keep Satisfied, Keep Informed, Monitor. |
+| **Stress test scenario** | Kiểm thử xác định hành vi và độ kiên cường của hệ thống khi vượt quá ngưỡng tải tối đa hoặc khi các dịch vụ phụ thuộc sập hoàn toàn. | Đo lường tính năng Circuit Breaker, Fallback, và khả năng tự hồi phục (Self-healing). |
+| **Structured prompt** | Prompt đầu vào được định dạng chuẩn mực bao gồm: Role (Vai trò), Task (Nhiệm vụ), Context (Ngữ cảnh), và Format (Định dạng đầu ra). | Đảm bảo AI phản hồi đúng trọng tâm, loại bỏ câu trả lời chung chung. |
+| **System architecture diagram** | Biểu đồ trực quan thể hiện các thành phần kiến trúc, luồng dữ liệu và tương tác trong toàn bộ hệ thống. | Thường biểu diễn theo mô hình C4 (Context, Container, Component, Code). |
+| **System deployment** | Quy trình phát hành phiên bản phần mềm vào môi trường thực tế (production) để người dùng cuối sử dụng. | Áp dụng chiến lược Blue/Green, Canary hoặc Rolling deployment. |
+| **Test case** | Bộ điều kiện, dữ liệu đầu vào và các bước thực hiện chi tiết dùng để xác minh hệ thống có đáp ứng đúng yêu cầu hay không. | Gồm ID, Preconditions, Action Steps, Expected Result, Status. |
+| **Test script** | Chương trình kiểm thử tự động (do AI sinh ra hoặc dev viết) thực thi các test case và đối chiếu kết quả kỳ vọng. | Dùng trong CI/CD pipeline để chạy regression testing tự động. |
+| **Trigger word** | Từ hoặc cụm từ tín hiệu (như "if", "when", "after", "provided that") báo hiệu bước quy trình, điều kiện rẽ nhánh hoặc quyết định. | Dùng trong phân tích văn bản để bóc tách Business Rules và Gateways. |
+| **Use case** | Bản mô tả chi tiết cách một tác nhân (actor) tương tác với hệ thống để đạt được một mục tiêu cụ thể, gồm luồng chính và luồng phụ. | Khung tài liệu hóa nghiệp vụ truyền thống kết hợp tốt với User Stories. |
+| **User story** | Câu tóm tắt ngắn gọn mô tả tính năng mong muốn dưới góc nhìn của người dùng: `As a [role], I want [goal], so that [reason]`. | Định dạng linh hoạt dùng trong Agile/Scrum để thể hiện giá trị nghiệp vụ. |
+| **Validation report** | Tài liệu có cấu trúc (thường do AI tổng hợp) báo cáo kết quả kiểm thử, nêu bật lỗi và đề xuất các hành động tiếp theo. | Phục vụ buổi họp Go/No-Go trước khi release. |
+| **Workflow optimization** | Thực hành sử dụng công cụ AI để rà soát, tinh chỉnh và nâng cao hiệu suất cũng như loại bỏ lãng phí trong quy trình nghiệp vụ. | Giảm lead time, loại bỏ các nút thắt cổ chai duyệt thủ công không cần thiết. |
